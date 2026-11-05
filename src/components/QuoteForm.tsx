@@ -101,7 +101,7 @@ export default function QuoteForm({ products }: { products: string[] }) {
         <input name="zip" autoComplete="postal-code" inputMode="numeric" className={field} />
       </label>
       <label className="eyebrow text-[11px] sm:col-span-2">
-        Fountain
+        Product
         <select name="product" className={field} defaultValue={presetProduct}>
           <option value="">Not sure yet — help me choose</option>
           {presetProduct && !products.includes(presetProduct) && <option>{presetProduct}</option>}

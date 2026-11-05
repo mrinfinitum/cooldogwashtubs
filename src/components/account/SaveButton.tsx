@@ -40,7 +40,7 @@ export default function SaveButton({ slug, compact = false }: { slug: string; co
         type="button"
         onClick={onClick}
         aria-pressed={saved}
-        aria-label={saved ? "Remove from saved" : "Save this fountain"}
+        aria-label={saved ? "Remove from saved" : "Save this product"}
         className={`grid size-9 place-items-center rounded-full bg-white/90 shadow-sm transition hover:text-teal ${saved ? "text-teal" : "text-ink"}`}
       >
         {heart}

@@ -13,7 +13,7 @@ export default function CartView() {
       <div className="py-10">
         <p className="text-lg text-ink/75">Your cart is empty.</p>
         <Link href="/shop/" className="btn btn-primary mt-6">
-          Shop Fountains
+          Shop Wash Tubs
         </Link>
       </div>
     );
@@ -37,7 +37,7 @@ export default function CartView() {
                 )}
               </div>
               <div className="flex flex-1 flex-col gap-2">
-                <Link href={`/fountain/${item.slug}/`} className="font-medium hover:text-teal">
+                <Link href={`/dog-park/${item.slug}/`} className="font-medium hover:text-teal">
                   {item.name}
                 </Link>
                 {(item.color || item.sku) && (

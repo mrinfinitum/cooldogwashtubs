@@ -29,7 +29,7 @@ export async function sendEmail(message: {
       ...(message.idempotencyKey ? { "idempotency-key": message.idempotencyKey } : {}),
     },
     body: JSON.stringify({
-      from: process.env.QUOTE_FROM_EMAIL || "Cool Dog Water Fountains <quotes@send.thedogparkcompany.com>",
+      from: process.env.QUOTE_FROM_EMAIL || "Cool Dog Wash Tubs <quotes@send.thedogparkcompany.com>",
       to: message.to,
       ...(message.replyTo ? { reply_to: message.replyTo } : {}),
       subject: message.subject,

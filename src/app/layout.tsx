@@ -24,22 +24,15 @@ const label = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Dog Water Fountains | Cool Dog Water Fountains",
-    template: "%s | Cool Dog Water Fountains",
+    default: "Dog Wash Tubs | Cool Dog Wash Tubs",
+    template: "%s | Cool Dog Wash Tubs",
   },
   description:
-    "Quality dog water fountains for dog parks, apartments, condos, HOAs, vet clinics and daycares. Made in the USA with contractor pricing.",
+    "Durable, premium dog wash tubs and dog bath tubs made in the USA. Standard and Pro Series tubs, grooming tables, safety steps and dryers.",
   openGraph: {
     siteName: SITE_NAME,
     type: "website",
     locale: "en_US",
-  },
-  icons: {
-    icon: [
-      { url: "/media/cropped-dog-water-fountain-favicon-32x32.png", sizes: "32x32" },
-      { url: "/media/cropped-dog-water-fountain-favicon-192x192.png", sizes: "192x192" },
-    ],
-    apple: "/media/cropped-dog-water-fountain-favicon-180x180.png",
   },
 };
 

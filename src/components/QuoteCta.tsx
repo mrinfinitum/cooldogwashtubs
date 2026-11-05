@@ -11,7 +11,7 @@ export default function QuoteCta() {
             Ready to plan your project?
           </h2>
           <p className="mt-4 max-w-2xl text-ink/75">
-            Most maintenance, engineering and construction staff can install our fountains.
+            Most maintenance, engineering and construction staff can install our wash tubs.
             Installation and assembly is available in the USA — ask us for a quote or an installer
             in your area.
           </p>

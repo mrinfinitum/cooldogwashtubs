@@ -1,4 +1,3 @@
-import { SHEETS } from "@/lib/sheets";
 import { getPages, getProducts } from "@/lib/content";
 import { formatPrice } from "@/lib/format";
 import { pageMetadata, productMetadata } from "@/lib/seo";
@@ -24,7 +23,7 @@ export async function GET() {
     const colors = p.colors.length ? ` Colors: ${p.colors.join(", ")}.` : "";
     return link(
       p.name,
-      `/fountain/${p.slug}/`,
+      `/dog-park/${p.slug}/`,
       `${price}. SKU ${p.sku}.${colors} ${text(meta.description)}`,
     );
   });
@@ -34,19 +33,18 @@ export async function GET() {
     const page = contentPages.find((p) => p.slug === slug);
     return page ? link(page.title, `/${page.slug}/`, text(pageMetadata(page).description)) : null;
   };
-  const guides = ["dog-park-designs"];
-  const listed = new Set([...guides, "dog-water-fountains-policy", "dog-water-fountains-terms"]);
+  const guides: string[] = [];
+  const listed = new Set([...guides, "privacy-policy", "cookie-policy"]);
 
   const body = [
     `# ${SITE_NAME}`,
     "",
-    "> Commercial-grade dog water fountains and dog rinse stations for dog parks, apartments, condos, HOAs, city parks, veterinary clinics and doggie daycares. Designed and manufactured in the USA, sold with contractor pricing. A brand of The Dog Park Company.",
+    "> Durable, premium dog wash tubs and dog bath tubs for groomers, kennels, veterinary clinics, doggie daycares and pet-friendly properties. Designed and manufactured in the USA. A brand of The Dog Park Company.",
     "",
     "Key facts:",
     "",
-    `- ${products.length} products: Fresh Flow dog water fountains (SLV, powder-coated, no basin so no standing water; push button for surface mount, or lever handle on a rolling base that connects to a garden hose, each with or without a pet hose) and a two-station stainless steel dog rinse station (SST).`,
+    `- ${products.length} products: Standard Series wash tubs (48″ and 60″, parallel access), stainless steel Pro Series tubs (parallel or perpendicular/ADA access), each with left or right side plumbing; grooming tables, safety steps and a wall-mounted dog dryer.`,
     "- Color Play® program: standard colors plus custom colors.",
-    "- Installation and assembly available across the USA; most maintenance or construction staff can install the fountains.",
     `- Sales and quotes: ${CONTACT.phone} · ${CONTACT.email} · ${CONTACT.hours}, ${CONTACT.days}.`,
     `- Online ordering: card checkout on the site (Stripe), with sales tax calculated at checkout and shipping at 12% of the order. Volume and project quotes: ${SITE_URL}/contact-us/`,
     "",
@@ -56,12 +54,11 @@ export async function GET() {
     "",
     "## Planning, installation and specifications",
     "",
-    ...SHEETS.map((s) => link(`${s.title} (PDF)`, s.pdf, `${s.blurb}.`)),
     ...guides.map(pageLine).filter((l): l is string => Boolean(l)),
     "",
     "## Company",
     "",
-    link("Shop all fountains", "/shop/"),
+    link("Shop all wash tubs", "/shop/"),
     link(
       "Contact us / Build a quote",
       "/contact-us/",
@@ -74,8 +71,8 @@ export async function GET() {
     "",
     "## Optional",
     "",
-    pageLine("dog-water-fountains-terms"),
-    pageLine("dog-water-fountains-policy"),
+    pageLine("privacy-policy"),
+    pageLine("cookie-policy"),
     link("Sitemap", "/sitemap.xml"),
     "",
   ]

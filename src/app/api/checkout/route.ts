@@ -68,7 +68,7 @@ export async function POST(request: Request) {
           },
         },
       ],
-      metadata: { source: "cooldogwaterfountains.com" },
+      metadata: { source: "cooldogwashtubs.com" },
     });
     return Response.json({ clientSecret: session.client_secret });
   } catch (error) {

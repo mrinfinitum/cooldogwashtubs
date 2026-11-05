@@ -13,11 +13,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return page
     ? pageMetadata(page, {
         description:
-          "Contact Cool Dog Water Fountains for contractor pricing, volume quotes, colors and installation help. Call 800.931.1562 or email sales@gymsfordogs.com.",
+          "Contact Cool Dog Wash Tubs for pricing, volume quotes, colors and installation help. Call 800.931.1562 or email sales@gymsfordogs.com.",
       })
     : buildMetadata({
-        title: "Contact Us | Build a Quote | Cool Dog Water Fountains",
-        description: "Request contractor pricing on dog water fountains.",
+        title: "Contact Us | Build a Quote | Cool Dog Wash Tubs",
+        description: "Request a quote on dog wash tubs.",
         path: "/contact-us/",
       });
 }
@@ -66,8 +66,8 @@ export default async function ContactPage() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden bg-mist">
             <Image
-              src={media("cool-dog-water-fountains-header.jpg")}
-              alt="A dog drinking from a Cool Dog water fountain"
+              src={media("dog-wash-tubs-header1.jpg")}
+              alt="A wet puppy surrounded by water droplets"
               fill
               sizes="(min-width: 1024px) 33vw, 100vw"
               className="object-cover"

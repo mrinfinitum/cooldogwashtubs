@@ -7,7 +7,7 @@ import { shortName } from "./format";
 const TITLE_MAX = 60;
 const DESC_MIN = 70;
 const DESC_MAX = 160;
-const TAGLINE = "Commercial dog water fountains, made in the USA with contractor pricing.";
+const TAGLINE = "Premium dog wash tubs and dog bath tubs, made in the USA.";
 
 /** Shorten "A | B | C" titles by dropping trailing segments until they fit. */
 export function fitTitle(title: string): string {
@@ -130,7 +130,7 @@ export function productMetadata(product: Product): Metadata {
   return buildMetadata({
     title: product.seo.title || `${name} | ${SITE_NAME}`,
     description: product.seo.description || generated,
-    path: `/fountain/${product.slug}/`,
+    path: `/dog-park/${product.slug}/`,
     image: product.images[0]?.src,
     noindex: product.seo.noindex,
   });

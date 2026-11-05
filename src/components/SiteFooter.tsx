@@ -4,8 +4,7 @@ import Link from "next/link";
 import { cacheLife } from "next/cache";
 import { getProducts } from "@/lib/content";
 import { shortName } from "@/lib/format";
-import ResourceLinkItem from "./sheets/ResourceLinkItem";
-import { CONTACT, COMPANY_LINKS, LEGAL_LINKS, LOGO_LIGHT, RESOURCE_LINKS, media } from "@/lib/site";
+import { CONTACT, COMPANY_LINKS, LEGAL_LINKS, LOGO_LIGHT, media } from "@/lib/site";
 import { Wave } from "./icons";
 
 const PARTNERS = [
@@ -53,17 +52,17 @@ export default async function SiteFooter() {
       <div className="border-b border-white/10">
         <div className="mx-auto grid max-w-[1600px] gap-10 px-4 py-16 lg:grid-cols-12 lg:px-8 lg:py-20">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-aqua">Hydration Made Easy</p>
+            <p className="eyebrow text-aqua">Bath Time, Upgraded</p>
             <h2 className="headline mt-4 text-6xl sm:text-7xl lg:text-8xl">
-              Built to keep
+              Clean paws,
               <br />
-              dogs cool.
+              happy tails.
             </h2>
           </div>
           <div className="flex flex-col justify-end gap-6 lg:col-span-5">
             <p className="max-w-md text-lg text-white/75">
-              Commercial-grade dog water fountains for parks, apartments, HOAs, vet clinics and
-              daycares — designed and made in the USA.
+              Durable, premium dog wash tubs and dog bath tubs for groomers, kennels, vet clinics and
+              pet-friendly properties — designed and made in the USA.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/contact-us/" className="btn btn-light">
@@ -83,10 +82,10 @@ export default async function SiteFooter() {
       {/* Link columns */}
       <div className="mx-auto grid max-w-[1600px] gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-3">
-          <Link href="/" aria-label="Cool Dog Water Fountains – home">
+          <Link href="/" aria-label="Cool Dog Wash Tubs – home">
             <Image
               src={LOGO_LIGHT.src}
-              alt="Cool Dog Water Fountains"
+              alt="Cool Dog Wash Tubs"
               width={LOGO_LIGHT.width}
               height={LOGO_LIGHT.height}
               sizes="180px"
@@ -96,24 +95,16 @@ export default async function SiteFooter() {
           <p className="mt-6 text-sm text-white/60">A brand of The Dog Park Company.</p>
         </div>
 
-        <FooterColumn title="Fountains" className="lg:col-span-3">
+        <FooterColumn title="Wash Tubs" className="lg:col-span-3">
           {products.map((p) => (
-            <FooterLink key={p.slug} href={`/fountain/${p.slug}/`}>
+            <FooterLink key={p.slug} href={`/dog-park/${p.slug}/`}>
               {shortName(p.name)}
             </FooterLink>
           ))}
           <FooterLink href="/shop/">Shop All</FooterLink>
         </FooterColumn>
 
-        <FooterColumn title="Resources" className="lg:col-span-2">
-          {RESOURCE_LINKS.map((l) => (
-            <li key={l.label}>
-              <ResourceLinkItem link={l} className="hover:text-aqua" />
-            </li>
-          ))}
-        </FooterColumn>
-
-        <FooterColumn title="Company" className="lg:col-span-2">
+        <FooterColumn title="Company" className="lg:col-span-3">
           {COMPANY_LINKS.map((l) => (
             <FooterLink key={l.href} href={l.href}>
               {l.label}
@@ -121,7 +112,7 @@ export default async function SiteFooter() {
           ))}
         </FooterColumn>
 
-        <FooterColumn title="Support" className="lg:col-span-2">
+        <FooterColumn title="Support" className="lg:col-span-3">
           <li>
             <a href={CONTACT.phoneHref} className="hover:text-aqua">
               {CONTACT.phone}

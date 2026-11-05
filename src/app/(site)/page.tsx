@@ -1,28 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
-import SheetButton from "@/components/sheets/SheetButton";
-import HeroVideo from "@/components/HeroVideo";
 import ProductCard from "@/components/ProductCard";
 import {
-  DropIcon,
   FlagIcon,
   PaletteIcon,
   RulerIcon,
   ShieldIcon,
   Wave,
+  WrenchIcon,
 } from "@/components/icons";
-import { CONTACT, HERO_POSTER, HERO_VIDEO, LOGO, SITE_NAME, SITE_URL, media } from "@/lib/site";
+import { CONTACT, LOGO, SITE_NAME, SITE_URL, media } from "@/lib/site";
 import { getProducts } from "@/lib/content";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
-    title: "Dog Water Fountains for Dog Parks & Apartments | Cool Dog",
+    title: "Dog Wash Tubs & Dog Bath Tubs, Made in the USA | Cool Dog",
     description:
-      "Commercial dog water fountains and dog rinse stations for dog parks, apartments, HOAs and vet clinics. Push-button and portable models, made in the USA.",
+      "Durable, easy-to-use dog wash tubs and dog bath tubs for groomers, kennels, vet clinics and pet-friendly properties. Standard and Pro Series, made in the USA.",
     path: "/",
-    image: media("cool-dog-water-fountains-header.jpg"),
+    image: media("dog-wash-tubs-header1.jpg"),
   });
 }
 
@@ -30,37 +28,28 @@ const FEATURES = [
   {
     icon: FlagIcon,
     title: "Made in the USA",
-    text: "Our dog water fountains are designed and manufactured in the United States.",
+    text: "Our dog wash tubs are designed and manufactured in the United States.",
   },
   {
     icon: ShieldIcon,
-    title: "Built to Last",
-    text: "Heavy-duty stainless steel and the highest quality outdoor powder coatings.",
+    title: "Quality",
+    text: "Built with the highest quality outdoor materials and coatings.",
   },
   {
-    icon: DropIcon,
-    title: "Drink, Wash, Cool",
-    text: "Pet hose and rinse options cool dogs off and keep them hydrated.",
+    icon: WrenchIcon,
+    title: "Tub Accessories",
+    text: "Steps, grooming tables and dryers that make bathing easier and safer for pets.",
   },
   {
     icon: RulerIcon,
-    title: "Architect Friendly",
-    text: "Intelligently designed and hand crafted for parks, plazas and properties.",
+    title: "Architectural Design",
+    text: "Intelligently designed and hand crafted using the best materials and ingenuity.",
   },
   {
     icon: PaletteIcon,
     title: "Color Play®",
-    text: "A range of standard colors, plus custom colors to match your brand.",
+    text: "A variety of standard colors, plus custom colors to match your space.",
   },
-];
-
-const COLOR_CHIPS = [
-  { src: "cool-dog-water-fountains-blue1-1.jpg", name: "Blue" },
-  { src: "cool-dog-water-fountains-GREEN2.jpg", name: "Green" },
-  { src: "cool-dog-water-fountains-silver2.jpg", name: "Silver" },
-  { src: "cool-dog-water-fountains-white2.jpg", name: "Bone White" },
-  { src: "cool-dog-water-fountains-spicy-mustard.jpg", name: "Spicy Mustard" },
-  { src: "cool-dog-water-fountains-SPECKLED-EARTH.jpg", name: "Speckled Earth" },
 ];
 
 export default async function HomePage() {
@@ -89,38 +78,33 @@ export default async function HomePage() {
       />
       {/* ---------------- Hero ---------------- */}
       <section className="relative isolate flex min-h-[min(78svh,820px)] items-end overflow-hidden bg-deep text-white lg:min-h-[min(86svh,960px)]">
-        {/* The video's first frame, shown until the video loads (and instead of it with reduced motion). */}
         <Image
-          src={HERO_POSTER}
-          alt=""
+          src={media("dog-wash-tubs-header1.jpg")}
+          alt="A wet puppy surrounded by water droplets"
           fill
           preload
           fetchPriority="high"
           sizes="100vw"
-          className="-z-20 object-cover"
-        />
-        <HeroVideo
-          src={HERO_VIDEO}
-          className="absolute inset-0 -z-20 size-full object-cover"
+          className="-z-20 object-cover object-[70%_center]"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-deep/35 to-teal/10" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/55 via-ink/15 to-transparent" />
         <div className="mx-auto w-full max-w-[1600px] px-4 pb-16 lg:px-8 lg:pb-24">
           <h1>
-            <span className="eyebrow block text-white">Dog Water Fountains · Made in the USA</span>
+            <span className="eyebrow block text-white">Dog Wash Tubs · Made in the USA</span>
             <span className="headline mt-5 block max-w-5xl text-[19vw] sm:text-[8.5rem] lg:text-[11rem]">
-              Hydration
+              Clean paws
               <br />
-              made easy
+              happy tails
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-white/85">
-            Top-quality dog water fountains and dog drinking fountains for parks, apartments, HOAs
-            and daycares — built tough, made to keep every dog cool and hydrated.
+            Durable, easy-to-use, and perfect for dogs of all sizes — keep your furry friend fresh
+            with our premium dog wash tubs.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="#products" className="btn btn-light">
-              Shop Fountains
+              Shop Wash Tubs
             </Link>
             <Link
               href="/contact-us/"
@@ -133,14 +117,14 @@ export default async function HomePage() {
         <Wave className="absolute -bottom-px left-0 h-6 w-full text-white" />
       </section>
 
-      {/* ---------------- The fountains ---------------- */}
+      {/* ---------------- The wash tubs ---------------- */}
       <section
         id="products"
         className="mx-auto max-w-[1600px] scroll-mt-28 px-4 py-20 lg:px-8 lg:py-28"
       >
         <div className="mb-10">
-          <p className="eyebrow text-teal">Contractor pricing on every model</p>
-          <h2 className="headline mt-3 text-6xl lg:text-8xl">The fountains</h2>
+          <p className="eyebrow text-teal">Standard &amp; Pro Series</p>
+          <h2 className="headline mt-3 text-6xl lg:text-8xl">The wash tubs</h2>
         </div>
         <div className="grid grid-cols-1 gap-x-4 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
@@ -154,7 +138,7 @@ export default async function HomePage() {
             <div>
               <h3 className="headline text-5xl">We&apos;ll help you choose</h3>
               <p className="mt-4 text-white/75">
-                Tell us about your park or property and we&apos;ll recommend the right fountain.
+                Tell us about your grooming space and we&apos;ll recommend the right tub.
               </p>
               <span className="btn btn-light mt-6 group-hover:bg-aqua-light">Build a Quote</span>
             </div>
@@ -166,8 +150,8 @@ export default async function HomePage() {
       <section className="grid bg-foam lg:grid-cols-2">
         <div className="relative aspect-square lg:aspect-auto lg:min-h-[640px]">
           <Image
-            src={media("DL-2000-STE-BLU-lifestyle.jpg")}
-            alt="A greyhound drinking from a blue Cool Dog water fountain"
+            src={media("dog-wash-tubs-header2.jpg")}
+            alt="A dog enjoying a bath"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
@@ -175,60 +159,21 @@ export default async function HomePage() {
         </div>
         <div className="flex items-center px-6 py-16 sm:px-12 lg:px-20">
           <div className="max-w-xl">
-            <p className="eyebrow text-teal">Parks · Apartments · HOAs · Vet Clinics</p>
+            <p className="eyebrow text-teal">Groomers · Kennels · Vet Clinics · Apartments</p>
             <h2 className="headline mt-4 text-6xl text-deep lg:text-7xl">
-              Quality water fountains for dogs
+              Upgrade bath time
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink/80">
-              Our Architectural Series dog water fountains are built for apartments, public parks,
-              dog parks, city parks, veterinary clinics, doggie daycare centers, animal parks and
-              HOAs.
+              Cool Dog Wash Tubs crafts durable, premium dog wash tubs and dog bath tubs, made in the
+              U.S.A. Intelligently designed and handcrafted for daily use.
             </p>
             <p className="mt-4 leading-relaxed text-ink/70">
-              Available in several colors, a high-quality pet drinking fountain is a welcome amenity
-              that makes any dog park a great place for dogs to play.
+              Choose a Standard Series tub in 48″ or 60″, or a stainless steel Pro Series tub with
+              parallel or perpendicular access — each with left or right side plumbing.
             </p>
-            <Link href="/dog-water-fountain-mission/" className="btn btn-primary mt-8">
-              Our Mission
+            <Link href="/shop/" className="btn btn-primary mt-8">
+              Shop Wash Tubs
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- Color Play ---------------- */}
-      <section className="relative overflow-hidden bg-deep text-white">
-        <div className="mx-auto grid max-w-[1600px] items-center gap-12 px-4 py-20 lg:grid-cols-12 lg:px-8 lg:py-28">
-          <div className="lg:col-span-4">
-            <p className="eyebrow text-aqua">Color Play®</p>
-            <h2 className="headline mt-4 text-6xl lg:text-8xl">Make a splash</h2>
-            <p className="mt-6 text-lg text-white/80">
-              Cool Dog fountains come in a range of cool colors to fit your dog play space or your
-              brand — and we offer custom colors too.
-            </p>
-            <SheetButton sheet="colors" className="btn btn-light mt-8">
-              See All Colors
-            </SheetButton>
-          </div>
-          <div className="no-scrollbar -mx-4 flex snap-x gap-4 overflow-x-auto px-4 lg:col-span-8 lg:mx-0 lg:grid lg:grid-cols-6 lg:overflow-visible lg:px-0">
-            {COLOR_CHIPS.map((chip, i) => (
-              <figure
-                key={chip.src}
-                className={`w-40 shrink-0 snap-start lg:w-auto ${i % 2 ? "lg:translate-y-10" : ""}`}
-              >
-                <div className="relative aspect-[1406/1772] overflow-hidden shadow-[0_20px_40px_-20px_rgba(0,0,0,0.6)]">
-                  <Image
-                    src={media(chip.src)}
-                    alt={`${chip.name} color chip`}
-                    fill
-                    sizes="200px"
-                    className="object-cover"
-                  />
-                </div>
-                <figcaption className="eyebrow mt-3 text-[10px] text-aqua-light">
-                  {chip.name}
-                </figcaption>
-              </figure>
-            ))}
           </div>
         </div>
       </section>
@@ -236,7 +181,7 @@ export default async function HomePage() {
       {/* ---------------- Feature band ---------------- */}
       <section className="border-b border-line bg-white" aria-labelledby="why-heading">
         <h2 id="why-heading" className="sr-only">
-          Why Cool Dog water fountains
+          Why Cool Dog wash tubs
         </h2>
         <div className="mx-auto grid max-w-[1600px] gap-px bg-line sm:grid-cols-2 lg:grid-cols-5">
           {FEATURES.map(({ icon: Icon, title, text }, i) => (
@@ -255,20 +200,20 @@ export default async function HomePage() {
       {/* ---------------- Story banners ---------------- */}
       <section className="mx-auto grid max-w-[1600px] gap-4 px-4 py-20 md:grid-cols-2 lg:px-8 lg:py-28">
         <StoryBanner
-          href="/dog-park-designs/"
-          image={media("RAMhpbanner.jpg")}
-          alt="A pack of dogs on dog park agility equipment"
-          eyebrow="Design & Operations"
-          title="Dog park designs"
-          cta="Plan Your Park"
+          href="/dog-park/cool-dog-wash-tub-architectural-series-safety-steps/"
+          image={media("ArchTubStairs-CloseUp.jpg")}
+          alt="Safety steps leading up to a Cool Dog wash tub"
+          eyebrow="Accessories"
+          title="Safety steps"
+          cta="Shop Steps"
         />
         <StoryBanner
-          href="/shop/"
-          image={media("DSC_9804_WM-scaled-1.jpg")}
-          alt="A shaded dog park with turf and agility equipment"
-          eyebrow="Architects & Contractors"
-          title="Specs & CAD"
-          cta="Find Your Fountain"
+          href="/dog-park/cool-dog-standard-series-grooming-table/"
+          image={media("standard-series-grooming-tables-with-dog.png")}
+          alt="A dog on a Standard Series grooming table"
+          eyebrow="Grooming"
+          title="Grooming tables"
+          cta="Shop Tables"
         />
       </section>
     </>

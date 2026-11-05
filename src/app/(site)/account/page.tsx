@@ -70,7 +70,7 @@ async function Dashboard() {
             <p className="mt-6 text-[15px] text-ink/75">
               No orders yet.{" "}
               <Link href="/shop/" className="link-underline">
-                Shop fountains
+                Shop wash tubs
               </Link>
             </p>
           )}
@@ -80,7 +80,7 @@ async function Dashboard() {
             <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3">
               {saved.map((s) => {
                 const external = !s.availableHere;
-                const href = external ? s.url : `/fountain/${s.slug}/`;
+                const href = external ? s.url : `/dog-park/${s.slug}/`;
                 return (
                   <li key={s.productId} className="flex flex-col">
                     <a href={href} className="group block">
@@ -111,7 +111,7 @@ async function Dashboard() {
             </ul>
           ) : (
             <p className="mt-6 text-[15px] text-ink/75">
-              Tap <strong>Save</strong> on any fountain to keep it here.
+              Tap <strong>Save</strong> on any product to keep it here.
             </p>
           )}
         </div>

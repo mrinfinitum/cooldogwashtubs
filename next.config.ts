@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: cms.hostname, pathname: "/wp-content/uploads/**" },
     ],
   },
-  // Previews (dev.cooldogwaterfountains.com and branch deploys) are never indexed.
+  // Previews (dev.cooldogwashtubs.com and branch deploys) are never indexed.
   async headers() {
     return process.env.VERCEL_ENV === "production"
       ? []
@@ -21,35 +21,25 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // The old WordPress front page.
-      { source: "/dog-water-fountains/", destination: "/", permanent: true },
       // Old WooCommerce URLs.
       { source: "/product-tag/:tag*", destination: "/shop/", permanent: true },
       { source: "/my-account/:path*", destination: "/account/", permanent: true },
-      // Category pages: with only a handful of fountains, the shop lists them all.
-      { source: "/prod-category/:path*", destination: "/shop/", permanent: true },
-      // Install guide for basin fountains, which are no longer sold here.
-      { source: "/water-fountain-install/", destination: "/shop/", permanent: true },
-      // Pages retired from the site: planning sheets now open over product pages
-      // (with PDF downloads); the rest were unused. See RETIRED_PAGE_SLUGS.
-      ...[
-        "dog-water-fountain-colors",
-        "dog-water-fountain-plumbing",
-        "installation-fresh-flow-fountains",
-        "dog-water-fountain-resources",
-        "success",
-      ].map((slug) => ({ source: `/${slug}/`, destination: "/shop/", permanent: true })),
-      // Fountains no longer sold on this site.
-      ...[
-        "cool-dog-drink-cool-bottle-filler-with-pet-hose-single-dog-basin-sst",
-        "cool-dog-drink-cool-bottle-filler-with-single-dog-basin-with-hose-bib-sst",
-        "cool-dog-water-fountain-dog-bowl-sst",
-        "cool-dog-water-fountain-dog-bowl-w-pet-hose-sst",
-        "cool-dog-water-fountain-dog-bowl-w-ada-bowl-sst",
-        "cool-dog-water-fountain-dog-bowl-w-ada-bowl-pet-hose-sst",
-        "cool-dog-fresh-flow-water-fountain-surface-mount-slv",
-        "cool-dog-fresh-flow-water-fountain-w-hose-surface-mount-slv",
-      ].map((slug) => ({ source: `/fountain/${slug}/`, destination: "/shop/", permanent: true })),
+      { source: "/wishlist-2/", destination: "/wishlist/", permanent: true },
+      // The WordPress site had separate left/right plumbing pages; the CMS has one
+      // product per tub with a plumbing-side option.
+      ...Object.entries({
+        "dog-wash-standard-series-48-w-lsp": "the-cool-dog-standard-series-dog-wash-station-48-w",
+        "dog-wash-standard-series-48-w-rsp": "the-cool-dog-standard-series-dog-wash-station-48-w",
+        "dog-wash-standard-series-60-w-lsp": "the-cool-dog-standard-series-dog-wash-station-60-w",
+        "dog-wash-standard-series-60-w-rsp": "the-cool-dog-standard-series-dog-wash-station-60-w",
+        "dog-wash-tub-pro-series-tub-lsp": "dog-wash-tub-pro-series-parallel-access-tub",
+        "dog-wash-tub-pro-series-tub-rsp": "dog-wash-tub-pro-series-parallel-access-tub",
+        "dog-wash-tub-pro-series-perpendicular-access-tub-lsp": "dog-wash-tub-pro-series-perpendicular-access-tub",
+        "dog-wash-tub-pro-series-perpendicular-access-tub-rsp": "dog-wash-tub-pro-series-perpendicular-access-tub",
+        "cool-dog-wash-tub-safety-steps": "cool-dog-wash-tub-architectural-series-safety-steps",
+      }).map(([from, to]) => ({ source: `/dog-park/${from}/`, destination: `/dog-park/${to}/`, permanent: true })),
+      // Category pages: the shop lists every product.
+      { source: "/product-category/:path*", destination: "/shop/", permanent: true },
       // Old WordPress admin: content is now edited in the Headless Commerce CMS.
       { source: "/wp-admin/:path*", destination: `${cms.origin}/wp-admin/`, permanent: false },
       { source: "/wp-login.php", destination: `${cms.origin}/wp-admin/`, permanent: false },

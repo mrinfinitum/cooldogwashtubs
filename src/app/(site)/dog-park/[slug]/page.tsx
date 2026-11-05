@@ -10,7 +10,6 @@ import ProductView from "@/components/ProductView";
 import QuoteCta from "@/components/QuoteCta";
 import RichText from "@/components/RichText";
 import { SITE_NAME } from "@/lib/site";
-import PlanningList from "@/components/sheets/PlanningList";
 import { firstParagraph, highlights, productFacts, productMetadata } from "@/lib/seo";
 import { getProduct, getProducts } from "@/lib/content";
 
@@ -21,14 +20,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/fountain/[slug]">): Promise<Metadata> {
+}: PageProps<"/dog-park/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
   return product ? productMetadata(product) : {};
 }
 
 
-async function ProductDetails({ params }: Pick<PageProps<"/fountain/[slug]">, "params">) {
+async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "params">) {
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) notFound();
@@ -72,7 +71,7 @@ async function ProductDetails({ params }: Pick<PageProps<"/fountain/[slug]">, "p
         </Link>
         <span>/</span>
         <Link href="/shop/" className="hover:text-teal">
-          Fountains
+          Wash Tubs
         </Link>
       </nav>
 
@@ -155,11 +154,6 @@ async function ProductDetails({ params }: Pick<PageProps<"/fountain/[slug]">, "p
                 <ProductDownloads downloads={product.downloads} />
               </div>
             )}
-
-            <div>
-              <h2 className="eyebrow">Planning &amp; installation</h2>
-              <PlanningList />
-            </div>
           </div>
         </aside>
       </section>
@@ -192,7 +186,7 @@ function ProductSkeleton() {
   );
 }
 
-export default function ProductPage({ params }: PageProps<"/fountain/[slug]">) {
+export default function ProductPage({ params }: PageProps<"/dog-park/[slug]">) {
   return (
     <>
       <div className="mx-auto max-w-[1600px] px-4 py-10 lg:px-8 lg:py-14">

@@ -7,7 +7,7 @@ const FIELDS = {
   phone: "Phone",
   projectType: "Project type",
   zip: "Project ZIP code",
-  product: "Fountain",
+  product: "Product",
   color: "Color",
   quantity: "Quantity",
   message: "Message",

@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     return Response.json({ received: true });
   }
   // The Stripe account is shared with other stores; record only this site's checkouts.
-  if (event.data.object.metadata?.source !== "cooldogwaterfountains.com") {
+  if (event.data.object.metadata?.source !== "cooldogwashtubs.com") {
     return Response.json({ received: true });
   }
 

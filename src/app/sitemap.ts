@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...products
       .filter((p) => !p.seo.noindex)
       .map((p) => ({
-        url: `${SITE_URL}/fountain/${p.slug}/`,
+        url: `${SITE_URL}/dog-park/${p.slug}/`,
         changeFrequency: "weekly" as const,
         priority: 0.9,
         images: p.images.slice(0, 10).map((i) => absolute(i.src)),

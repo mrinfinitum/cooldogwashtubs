@@ -39,7 +39,7 @@ export default function CheckoutView() {
       <div className="py-10">
         <p className="text-lg text-ink/75">Your cart is empty.</p>
         <Link href="/shop/" className="btn btn-primary mt-6">
-          Shop Fountains
+          Shop Wash Tubs
         </Link>
       </div>
     );

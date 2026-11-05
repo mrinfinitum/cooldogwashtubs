@@ -27,10 +27,10 @@ export default function ProductCardView({
 }) {
   const [first, second] = product.images;
   const series = seriesOf(product.sku);
-  // Color dot being hovered: the card shows the fountain in that color.
+  // Color dot being hovered: the card shows the product in that color.
   const [preview, setPreview] = useState<ColorOption | null>(null);
 
-  const href = `/fountain/${product.slug}/${
+  const href = `/dog-park/${product.slug}/${
     preview ? `?${new URLSearchParams({ color: preview.color })}` : ""
   }`;
 

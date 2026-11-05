@@ -17,7 +17,7 @@ export default function NotFound() {
             href="/shop/"
             className="btn btn-outline hover:!border-white hover:!bg-white hover:!text-ink"
           >
-            Shop Fountains
+            Shop Wash Tubs
           </Link>
         </div>
       </PageHero>
