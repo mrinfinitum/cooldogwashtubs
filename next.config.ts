@@ -67,6 +67,10 @@ const nextConfig: NextConfig = {
   // Keep the old WordPress-style URLs (/page-name/) so links and rankings carry over.
   trailingSlash: true,
   images: {
+    // AVIF first (smallest), WebP for browsers without it.
+    formats: ["image/avif", "image/webp"],
+    // 60 for full-screen heroes under a dark gradient; 75 (the default) everywhere else.
+    qualities: [60, 75],
     remotePatterns: [
       { protocol: "https", hostname: cms.hostname, pathname: "/wp-content/uploads/**" },
     ],

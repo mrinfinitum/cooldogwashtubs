@@ -24,7 +24,8 @@ export default async function SiteHeader() {
                 >
                   Shop <ChevronIcon width={14} height={14} />
                 </Link>
-                <div className="invisible absolute inset-x-0 top-full border-y border-line bg-white opacity-0 shadow-[0_24px_40px_-24px_rgba(7,34,43,0.35)] transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                {/* display:none (not visibility) until opened, so its lazy thumbnails aren't fetched on every page */}
+                <div className="absolute inset-x-0 top-full hidden border-y border-line bg-white shadow-[0_24px_40px_-24px_rgba(7,34,43,0.35)] group-focus-within:block group-hover:block">
                   <div className="mx-auto max-w-[1600px] px-8 py-10">
                     <ul className="grid grid-cols-5 gap-6">
                       {products.map((p) => (

@@ -85,6 +85,7 @@ export default async function HomePage() {
           preload
           fetchPriority="high"
           sizes="100vw"
+          quality={60}
           className="-z-20 object-cover object-[78%_center] lg:object-[70%_center]"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-deep/35 to-teal/10" />

@@ -29,6 +29,10 @@ export default function ProductCardView({
   const series = seriesOf(product.sku);
   // Color dot being hovered: the card shows the product in that color.
   const [preview, setPreview] = useState<ColorOption | null>(null);
+  // The hover photo loads only once the card is hovered or focused, so it never competes with
+  // the page's first images; the cross-fade starts once it has loaded.
+  const [wantSecond, setWantSecond] = useState(false);
+  const [secondReady, setSecondReady] = useState(false);
 
   const href = `/dog-park/${product.slug}/${
     preview ? `?${new URLSearchParams({ color: preview.color })}` : ""
@@ -49,6 +53,8 @@ export default function ProductCardView({
       <Link
         href={href}
         className="group block"
+        onMouseEnter={() => setWantSecond(true)}
+        onFocus={() => setWantSecond(true)}
         onMouseLeave={() => setPreview(null)}
       >
         <div className="relative aspect-square overflow-hidden bg-mist">
@@ -63,18 +69,19 @@ export default function ProductCardView({
               className={`object-contain transition duration-500 ${
                 preview?.image
                   ? "opacity-0"
-                  : second
+                  : second && secondReady
                     ? "group-hover:opacity-0"
                     : ""
               }`}
             />
           )}
-          {second && !preview?.image && (
+          {second && wantSecond && !preview?.image && (
             <Image
               src={second.src}
               alt=""
               fill
               sizes={SIZES}
+              onLoad={() => setSecondReady(true)}
               className="object-contain opacity-0 transition duration-500 group-hover:opacity-100"
             />
           )}
