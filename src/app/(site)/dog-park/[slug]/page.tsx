@@ -100,7 +100,7 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
           {/* The section heading; the name repeats the H1 above, so it isn't a heading here. */}
           <h2 className="eyebrow text-teal">Details &amp; features</h2>
           <p className="headline mt-3 text-4xl lg:text-5xl">{shortName(product.name)}</p>
-          <RichText html={withoutRepeats(product.descriptionHtml, product.page)} className="mt-8 max-w-[68ch] text-[16px] leading-relaxed" />
+          <RichText html={withoutRepeats(product.descriptionHtml, product.page)} className="mt-8 max-w-[68ch]" />
         </div>
 
         <aside className="lg:col-span-5">
@@ -152,7 +152,7 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
                 </div>
               </dl>
               {facts.soldSeparately && (
-                <p className="mt-4 text-sm leading-relaxed text-ink/75">
+                <p className="mt-4 text-sm leading-relaxed text-body">
                   <span className="font-semibold text-ink">Sold separately: </span>
                   {facts.soldSeparately}
                 </p>

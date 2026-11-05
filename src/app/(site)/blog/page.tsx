@@ -40,8 +40,8 @@ export default function BlogIndex() {
                 <p className="eyebrow mt-5 text-[11px] text-muted">
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 </p>
-                <h3 className="headline mt-2 text-3xl text-deep group-hover:text-teal">{post.title}</h3>
-                <p className="mt-3 line-clamp-3 text-[15px] leading-relaxed text-ink/70">{post.excerpt}</p>
+                <h3 className="headline mt-2 text-3xl text-ink group-hover:text-teal">{post.title}</h3>
+                <p className="mt-3 line-clamp-3 text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
               </Link>
             </li>
           ))}

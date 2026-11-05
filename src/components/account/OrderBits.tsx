@@ -5,8 +5,8 @@ const TONE: Record<string, string> = {
   completed: "bg-teal text-white",
   "on-hold": "bg-[#f4e3b5] text-ink",
   pending: "bg-[#f4e3b5] text-ink",
-  cancelled: "bg-line text-ink/70",
-  refunded: "bg-line text-ink/70",
+  cancelled: "bg-line text-muted",
+  refunded: "bg-line text-muted",
   failed: "bg-[#f3c9c4] text-ink",
 };
 

@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">
                 <li key={p.slug}>
                   <Link href={`/blog/${p.slug}/`} className="group block">
                     <p className="eyebrow text-[11px] text-muted">{formatPostDate(p.date)}</p>
-                    <h3 className="headline mt-2 text-2xl text-deep group-hover:text-teal">{p.title}</h3>
+                    <h3 className="headline mt-2 text-2xl text-ink group-hover:text-teal">{p.title}</h3>
                   </Link>
                 </li>
               ))}

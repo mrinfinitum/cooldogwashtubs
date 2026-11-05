@@ -7,7 +7,7 @@ import { RemoveSavedButton } from "./AccountActions";
 export default function SavedGrid({ saved, columns = 3 }: { saved: SavedProduct[]; columns?: 3 | 4 }) {
   if (!saved.length) {
     return (
-      <p className="mt-6 text-[15px] text-ink/75">
+      <p className="mt-6 text-[15px] text-body">
         Tap the <strong>heart</strong> on any product to keep it here.
       </p>
     );

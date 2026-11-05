@@ -159,14 +159,14 @@ export default async function HomePage() {
         <div className="flex items-center px-6 py-16 sm:px-12 lg:px-20">
           <div className="max-w-xl">
             <p className="eyebrow text-teal">Groomers · Kennels · Vet Clinics · Apartments</p>
-            <h2 className="headline mt-4 text-6xl text-deep lg:text-7xl">
+            <h2 className="headline mt-4 text-6xl text-ink lg:text-7xl">
               Upgrade bath time
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink/80">
+            <p className="mt-6 text-lg leading-relaxed text-body">
               Cool Dog Wash Tubs crafts durable, premium dog wash tubs and dog bath tubs, made in the
               U.S.A. Intelligently designed and handcrafted for daily use.
             </p>
-            <p className="mt-4 leading-relaxed text-ink/70">
+            <p className="mt-4 leading-relaxed text-muted">
               Choose a Standard Series tub in 48″ or 60″, or a stainless steel Pro Series tub with
               parallel or perpendicular access — each with left or right side plumbing.
             </p>
