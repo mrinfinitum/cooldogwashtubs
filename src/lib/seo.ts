@@ -153,7 +153,7 @@ export function withoutRepeats(html: string, page: ProductPage): string {
   const shown = new Set(page.highlights.map(sameText));
   // Top-level blocks; text between them is kept as is.
   const blocks = html.match(/<(p|ul|ol|h[1-6])\b[^>]*>[\s\S]*?<\/\1>|[\s\S]+?(?=<(?:p|ul|ol|h[1-6])\b|$)/gi) ?? [];
-  type Block = { html: string; drop?: boolean; emptied?: boolean; heading?: boolean };
+  type Block = { html: string; drop?: boolean; emptied?: boolean; heading?: boolean; intro?: boolean };
   const out: Block[] = blocks.map((b) => {
     const tag = b.match(/^<(\w+)/)?.[1]?.toLowerCase();
     if (tag === "p") {
@@ -168,12 +168,21 @@ export function withoutRepeats(html: string, page: ProductPage): string {
       if (!/<li\b/i.test(kept)) return { html: b, drop: true, emptied: true };
       return { html: kept };
     }
-    return { html: b, heading: HEADING.test(b.trim()) };
+    // A short line ending in ":" ("Accessory kit includes:") introduces the list after it.
+    const intro = tag === "p" && /:$/.test(plainText(b)) && plainText(b).length < 60;
+    return { html: b, heading: HEADING.test(b.trim()), intro };
   });
-  // A heading whose only content was an emptied list goes too.
+  // A heading (or intro line) whose only content was an emptied list goes too.
   const real = (b: Block) => !b.drop && b.html.trim() !== "";
   out.forEach((b, i) => {
-    if (!b.heading || b.drop) return;
+    if (b.drop) return;
+    // An intro line goes when the list right after it was emptied.
+    if (b.intro) {
+      const next = out.slice(i + 1).find((x) => x.html.trim() !== "");
+      if (next?.emptied) b.drop = true;
+      return;
+    }
+    if (!b.heading) return;
     const after = out.slice(i + 1);
     const next = after.findIndex(real);
     const between = next === -1 ? after : after.slice(0, next);
