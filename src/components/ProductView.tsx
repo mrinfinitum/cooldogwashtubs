@@ -27,6 +27,10 @@ type Props = {
   inStock: boolean;
   images: ProductImage[];
   variations: ColorOption[];
+  /** What the options are, e.g. "Color" or "Plumbing Side". */
+  optionLabel?: string;
+  /** Colors show as swatches; other options as labelled buttons. */
+  optionIsColor?: boolean;
   slug: string;
 };
 
@@ -44,6 +48,7 @@ const useQueryString = () =>
 
 export default function ProductView(props: Props) {
   const { name, slug, sku, series, lead, highlights = [], images, variations, inStock } = props;
+  const { optionLabel = "Color", optionIsColor = true } = props;
 
   // A product card can link here with ?color=… to open on that color.
   const query = useQueryString();
@@ -175,7 +180,7 @@ export default function ProductView(props: Props) {
           {variations.length > 0 && (
             <fieldset className="mt-7">
               <legend className="eyebrow">
-                Color: <span className="text-teal">{shownColor?.color}</span>
+                {optionLabel}: <span className="text-teal">{shownColor?.color}</span>
               </legend>
               <div className="mt-3 flex flex-wrap gap-2.5">
                 {variations.map((v) => (
@@ -190,13 +195,23 @@ export default function ProductView(props: Props) {
                     aria-pressed={v.id === variation?.id}
                     aria-label={v.color}
                     title={v.color}
-                    className={`size-9 rounded-full border border-black/15 outline-offset-[3px] transition ${
-                      v.id === variation?.id
-                        ? "outline-2 outline-teal"
-                        : "hover:outline-1 hover:outline-ink/40"
-                    }`}
-                    style={{ background: v.swatch ?? swatchColor(v.color) }}
-                  />
+                    className={
+                      optionIsColor
+                        ? `size-9 rounded-full border border-black/15 outline-offset-[3px] transition ${
+                            v.id === variation?.id
+                              ? "outline-2 outline-teal"
+                              : "hover:outline-1 hover:outline-ink/40"
+                          }`
+                        : `border px-4 py-2.5 text-[14px] transition ${
+                            v.id === variation?.id
+                              ? "border-teal bg-teal text-white"
+                              : "border-ink/20 hover:border-ink/50"
+                          }`
+                    }
+                    style={optionIsColor ? { background: v.swatch ?? swatchColor(v.color) } : undefined}
+                  >
+                    {optionIsColor ? null : v.color}
+                  </button>
                 ))}
               </div>
             </fieldset>

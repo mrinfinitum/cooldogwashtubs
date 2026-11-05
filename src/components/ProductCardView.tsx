@@ -10,7 +10,7 @@ import { seriesOf } from "@/lib/format";
 /** The product fields a card needs (kept small: it is sent to the browser). */
 export type CardProduct = Pick<
   Product,
-  "slug" | "sku" | "name" | "price" | "regularPrice" | "onSale" | "images" | "options"
+  "slug" | "sku" | "name" | "price" | "regularPrice" | "onSale" | "images" | "options" | "optionIsColor"
 >;
 import Price from "./Price";
 import SaveButton from "./account/SaveButton";
@@ -106,7 +106,7 @@ export default function ProductCardView({
             {product.name}
           </h3>
           <Price price={product.price} regularPrice={product.regularPrice} />
-          {product.options.length > 0 && (
+          {product.optionIsColor && product.options.length > 0 && (
             <div className="flex flex-wrap items-center gap-1.5">
               {product.options.slice(0, 8).map((option) => (
                 <span

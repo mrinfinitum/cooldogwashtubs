@@ -9,7 +9,7 @@ import ProductDownloads from "@/components/ProductDownloads";
 import ProductView from "@/components/ProductView";
 import QuoteCta from "@/components/QuoteCta";
 import RichText from "@/components/RichText";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, canonicalUrl } from "@/lib/site";
 import { firstParagraph, highlights, productFacts, productMetadata } from "@/lib/seo";
 import { getProduct, getProducts } from "@/lib/content";
 
@@ -41,6 +41,7 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
+    url: canonicalUrl(`/dog-park/${product.slug}/`),
     name: product.name,
     sku: product.sku,
     image: product.images.map((i) => i.src),
@@ -48,6 +49,7 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
     brand: { "@type": "Brand", name: SITE_NAME },
     offers: {
       "@type": "Offer",
+      url: canonicalUrl(`/dog-park/${product.slug}/`),
       priceCurrency: "USD",
       price: (product.price / 100).toFixed(2),
       availability: product.inStock
@@ -88,6 +90,8 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
         inStock={product.inStock}
         images={product.images}
         variations={product.options}
+        optionLabel={product.optionLabel}
+        optionIsColor={product.optionIsColor}
       />
 
       {/* Details: the full description, with the key facts, downloads and resources beside it */}

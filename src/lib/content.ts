@@ -15,7 +15,11 @@ export type Seo = {
 
 export type ProductImage = { src: string; alt: string };
 
-/** One color option of a product. */
+/**
+ * One option (variation) of a product. `color` holds the option's value,
+ * whatever the option is: a color ("Blue") or e.g. a plumbing side
+ * ("Right Side Plumbing"); the cart and checkout pass it through as-is.
+ */
 export type ColorOption = {
   id: string;
   color: string;
@@ -48,6 +52,10 @@ export type Product = {
   categories: { slug: string; name: string; isSeries: boolean }[];
   colors: string[];
   options: ColorOption[];
+  /** What the options are, e.g. "Color" or "Plumbing Side". */
+  optionLabel: string;
+  /** True when the options are colors (shown as swatches). */
+  optionIsColor: boolean;
   /** Spec sheets, CAD drawings and guides uploaded in the CMS. */
   downloads: Download[];
   taxCode: string;
@@ -88,11 +96,12 @@ type RawProduct = {
   inStock: boolean;
   images: RawImage[];
   categories: { slug: string; name: string; isSeries: boolean }[];
-  attributes: { slug: string; values: { name: string; swatch: string | null }[] }[];
+  attributes: { name: string; slug: string; values: { name: string; swatch: string | null }[] }[];
   options: {
     id: string;
     sku: string;
     color: string | null;
+    attributes?: Record<string, string>;
     price: number | null;
     listPrice: number | null;
     inStock: boolean;
@@ -123,19 +132,26 @@ function mapProduct(p: RawProduct): Product {
   const swatches = new Map(
     (p.attributes.find((a) => a.slug === "color")?.values ?? []).map((v) => [v.name, v.swatch]),
   );
+  // Options are colors when the product has them, otherwise its first option
+  // group (e.g. wash tubs: Plumbing Side).
+  const optionIsColor = p.options.some((o) => o.color);
+  const optionKey = optionIsColor ? "color" : Object.keys(p.options[0]?.attributes ?? {})[0];
+  const optionLabel =
+    p.attributes.find((a) => a.slug === optionKey)?.name ?? (optionIsColor ? "Color" : "Option");
   const options = p.options
-    .filter((o) => o.color)
-    .map((o) => {
+    .map((o) => ({ o, value: optionIsColor ? o.color : optionKey ? o.attributes?.[optionKey] : null }))
+    .filter((x): x is { o: RawProduct["options"][number]; value: string } => Boolean(x.value))
+    .map(({ o, value }) => {
       const optionPrice = o.price ?? price;
       return {
         id: o.id,
-        color: o.color!,
+        color: value,
         sku: o.sku || p.sku,
-        swatch: swatches.get(o.color!) ?? undefined,
+        swatch: optionIsColor ? (swatches.get(value) ?? undefined) : undefined,
         price: optionPrice,
         regularPrice: Math.max(o.listPrice ?? optionPrice, optionPrice),
         inStock: o.inStock,
-        image: image(o.image, `${p.name} – ${o.color}`),
+        image: image(o.image, `${p.name} – ${value}`),
       };
     });
   return {
@@ -152,8 +168,10 @@ function mapProduct(p: RawProduct): Product {
     inStock: p.inStock,
     images: p.images.flatMap((img) => image(img, p.name) ?? []),
     categories: p.categories,
-    colors: options.map((o) => o.color),
+    colors: optionIsColor ? options.map((o) => o.color) : [],
     options,
+    optionLabel,
+    optionIsColor,
     downloads: p.downloads ?? [],
     taxCode: p.taxCode,
     seo: p.seo,

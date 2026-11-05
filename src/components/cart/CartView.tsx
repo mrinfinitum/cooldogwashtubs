@@ -42,7 +42,7 @@ export default function CartView() {
                 </Link>
                 {(item.color || item.sku) && (
                   <p className="eyebrow text-[11px] text-muted">
-                    {[item.color && `Color: ${item.color}`, item.sku && `SKU ${item.sku}`]
+                    {[item.color, item.sku && `SKU ${item.sku}`]
                       .filter(Boolean)
                       .join(" · ")}
                   </p>
