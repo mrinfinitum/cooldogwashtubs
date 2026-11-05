@@ -97,8 +97,9 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
       {/* Details: the full description, with the key facts, downloads and resources beside it */}
       <section className="mt-20 grid grid-cols-1 gap-12 border-t border-line pt-14 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 lg:col-span-7">
-          <p className="eyebrow text-teal">Details &amp; features</p>
-          <h2 className="headline mt-3 text-4xl lg:text-5xl">{shortName(product.name)}</h2>
+          {/* The section heading; the name repeats the H1 above, so it isn't a heading here. */}
+          <h2 className="eyebrow text-teal">Details &amp; features</h2>
+          <p className="headline mt-3 text-4xl lg:text-5xl">{shortName(product.name)}</p>
           <RichText html={withoutRepeats(product.descriptionHtml, product.page)} className="mt-8 max-w-[68ch] text-[16px] leading-relaxed" />
         </div>
 

@@ -29,16 +29,16 @@ export const CONTACT = {
 
 /** White-text logo for dark backgrounds (footer). */
 export const LOGO_LIGHT = {
-  src: "/media/cool-dog-wash-tubs-logo-light-main.png",
-  width: 500,
-  height: 181,
+  src: "/media/cool-dog-wash-tubs-logo-2026-light.png",
+  width: 1200,
+  height: 411,
 };
 
 /** Header logo (dark text). */
 export const LOGO = {
-  src: "/media/cooldogwashtubs_logo-1.png",
-  width: 799,
-  height: 272,
+  src: "/media/cool-dog-wash-tubs-logo-2026.png",
+  width: 1200,
+  height: 411,
 };
 
 /** Design images and media stored with the site in /public/media/. */
