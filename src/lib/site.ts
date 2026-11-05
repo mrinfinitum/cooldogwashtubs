@@ -45,6 +45,7 @@ export const LOGO = {
 export const media = (file: string) => `/media/${file}`;
 
 export const COMPANY_LINKS = [
+  { href: "/blog/", label: "Blog" },
   { href: "/contact-us/", label: "Contact Us" },
   { href: "/wishlist/", label: "Wishlist" },
   { href: "/account/", label: "My Account" },

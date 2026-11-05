@@ -85,7 +85,7 @@ export default async function HomePage() {
           preload
           fetchPriority="high"
           sizes="100vw"
-          className="-z-20 object-cover object-[70%_center]"
+          className="-z-20 object-cover object-[78%_center] lg:object-[70%_center]"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-deep/35 to-teal/10" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/55 via-ink/15 to-transparent" />
@@ -247,7 +247,7 @@ function StoryBanner({
         sizes="(min-width: 768px) 50vw, 100vw"
         className="-z-10 object-cover transition duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-deep/20 to-transparent" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-deep/45 to-transparent" />
       <div className="p-6 lg:p-10">
         <p className="eyebrow text-aqua-light">{eyebrow}</p>
         <h2 className="headline mt-3 text-5xl lg:text-7xl">{title}</h2>

@@ -6,11 +6,12 @@ import { CONTACT } from "@/lib/site";
 import { track } from "@/lib/analytics";
 
 const PROJECT_TYPES = [
-  "Dog park",
-  "Apartment / condo",
-  "HOA / community",
-  "City or public park",
-  "Vet clinic / daycare",
+  "Grooming salon",
+  "Kennel / boarding",
+  "Vet clinic",
+  "Doggie daycare",
+  "Apartment / condo pet spa",
+  "Home",
   "Other",
 ];
 

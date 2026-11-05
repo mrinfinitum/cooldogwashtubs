@@ -34,6 +34,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
+  icons: {
+    icon: [
+      { url: "/media/favicon-32.png", sizes: "32x32" },
+      { url: "/media/favicon-192.png", sizes: "192x192" },
+    ],
+    apple: "/media/favicon-180.png",
+  },
 };
 
 export const viewport: Viewport = {

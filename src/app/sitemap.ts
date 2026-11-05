@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { CANONICAL_URL } from "@/lib/site";
 import { getPages, getProducts } from "@/lib/content";
+import { getPosts } from "@/lib/blog";
 
 const absolute = (src: string) => (src.startsWith("http") ? src : `${CANONICAL_URL}${src}`);
 
@@ -20,6 +21,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
         images: p.images.slice(0, 10).map((i) => absolute(i.src)),
       })),
+    { url: `${CANONICAL_URL}/blog/`, changeFrequency: "monthly", priority: 0.5 },
+    ...getPosts().map((p) => ({
+      url: `${CANONICAL_URL}/blog/${p.slug}/`,
+      lastModified: p.date,
+      changeFrequency: "yearly" as const,
+      priority: 0.4,
+      images: p.image ? [absolute(p.image.src)] : [],
+    })),
     {
       url: `${CANONICAL_URL}/contact-us/`,
       lastModified: contact?.modified,

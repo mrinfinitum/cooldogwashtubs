@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import { RemoveSavedButton, ResendVerifyButton, SignOutButton } from "@/components/account/AccountActions";
+import { ResendVerifyButton, SignOutButton } from "@/components/account/AccountActions";
+import SavedGrid from "@/components/account/SavedGrid";
 import { AddressBlock, StatusBadge } from "@/components/account/OrderBits";
 import { formatDate, getCustomer, getOrders, getSaved } from "@/lib/account";
-import { formatPrice, shortName } from "@/lib/format";
+import { formatPrice } from "@/lib/format";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = { title: "My Account", robots: { index: false, follow: false } };
@@ -84,44 +84,7 @@ async function Dashboard() {
           )}
 
           <h2 className="headline mt-14 text-4xl">Saved</h2>
-          {saved.length ? (
-            <ul className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3">
-              {saved.map((s) => {
-                const external = !s.availableHere;
-                const href = external ? s.url : `/dog-park/${s.slug}/`;
-                return (
-                  <li key={s.productId} className="flex flex-col">
-                    <a href={href} className="group block">
-                      <span className="relative block aspect-square overflow-hidden bg-mist">
-                        {s.image && (
-                          <Image
-                            src={s.image.src}
-                            alt={s.image.alt}
-                            fill
-                            sizes="240px"
-                            className="object-contain transition duration-500 group-hover:scale-[1.03]"
-                          />
-                        )}
-                      </span>
-                      <span className="mt-3 block text-[15px] leading-snug group-hover:text-teal">
-                        {shortName(s.name)}
-                      </span>
-                    </a>
-                    <span className="mt-1 text-sm text-muted">
-                      {external && s.storefront ? `On ${s.storefront.name}` : formatPrice(s.price)}
-                    </span>
-                    <span className="mt-2">
-                      <RemoveSavedButton slug={s.slug} />
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <p className="mt-6 text-[15px] text-ink/75">
-              Tap <strong>Save</strong> on any product to keep it here.
-            </p>
-          )}
+          <SavedGrid saved={saved} />
         </div>
 
         <aside className="space-y-8 bg-mist p-6 lg:col-span-4">

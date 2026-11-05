@@ -56,6 +56,11 @@ export default async function SiteHeader() {
               </li>
 
               <li>
+                <Link href="/blog/" className="eyebrow py-2 hover:text-teal">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact-us/" className="eyebrow py-2 hover:text-teal">
                   Contact
                 </Link>
@@ -92,6 +97,11 @@ export default async function SiteHeader() {
           </a>
           <Link href="/contact-us/" className="btn btn-primary hidden min-h-10 px-5 lg:inline-flex">
             Build a Quote
+          </Link>
+          <Link href="/wishlist/" aria-label="Wishlist" className="hidden hover:text-teal sm:block">
+            <svg viewBox="0 0 24 24" width={22} height={22} fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+              <path d="M12 20.5s-7.5-4.6-9.3-9.4C1.4 7.6 3.6 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.6 0 5.8 3.6 4.5 7.1-1.8 4.8-9.3 9.4-9.3 9.4Z" />
+            </svg>
           </Link>
           <Link href="/account/" aria-label="My account" className="hover:text-teal">
             <UserIcon width={22} height={22} />

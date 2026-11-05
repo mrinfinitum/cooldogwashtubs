@@ -128,7 +128,7 @@ export function productMetadata(product: Product): Metadata {
   const colors = product.colors.length;
   const generated = `${name}: ${formatPrice(product.price)} contractor price${
     colors ? `, ${colors} ${colors === 1 ? "color" : "colors"}` : ""
-  }. Made in the USA for dog parks, apartments and HOAs.`;
+  }. Made in the USA for groomers, kennels, vet clinics and pet spas.`;
   return buildMetadata({
     title: product.seo.title || `${name} | ${SITE_NAME}`,
     description: product.seo.description || generated,

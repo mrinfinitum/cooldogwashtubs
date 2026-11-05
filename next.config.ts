@@ -99,6 +99,30 @@ const nextConfig: NextConfig = {
         "dog-wash-tub-pro-series-perpendicular-access-tub-rsp": "dog-wash-tub-pro-series-perpendicular-access-tub",
         "cool-dog-wash-tub-safety-steps": "cool-dog-wash-tub-architectural-series-safety-steps",
       }).map(([from, to]) => ({ source: `/dog-park/${from}/`, destination: `/dog-park/${to}/`, permanent: true })),
+      // Blog: WordPress posts lived at /<slug>/; they're now under /blog/.
+      { source: "/dog-park-blog/", destination: "/blog/", permanent: true },
+      ...[
+        "smile-bright-a-guide-to-proper-teeth-care-for-your-furry-friend",
+        "balancing-act-understanding-the-risks-and-benefits-of-dog-vaccinations",
+        "dive-in-the-surprising-health-benefits-of-dogs-swimming",
+        "wagging-tails-the-benefits-of-dog-socialization-at-dog-parks",
+        "fueling-the-fun-a-guide-to-proper-pet-nutrition-for-active-dogs",
+        "canine-fitness-unleashing-the-power-of-muscular-growth-in-your-dog",
+        "pawsitively-healthy-a-guide-to-maintaining-your-dogs-paw-health",
+        "shine-bright-unveiling-the-secrets-to-a-healthy-dog-coat",
+        "unleashing-wellness-the-pawsitive-benefits-of-exercise-for-dogs",
+        "blog-post-layout-05",
+      ].map((slug) => ({ source: `/${slug}/`, destination: `/blog/${slug}/`, permanent: true })),
+      // The theme's lorem-ipsum demo posts, not carried over.
+      ...[
+        "sit-elementum-vulputate-platea-pellentesque-velit-nisi-id-etiam-donec-felis-viverra",
+        "wolf-lo-fi-bodega-boys-messenger-bag-solarpunk",
+        "etsy-echo-park-master-cleanse-chicharrones-plaid-art-party",
+        "tofu-enamel-pin-scenester-shabby-chic-tumeric",
+        "gastropub-gochujang-blackbird-spyplane",
+        "messenger-bag-cray-normcore-jianbing-seitan-subway",
+        "authentic-deep-v-vegan-big-mood-snackwave-wayfarers-tonx-air-plant",
+      ].map((slug) => ({ source: `/${slug}/`, destination: "/blog/", permanent: true })),
       // Category pages: the shop lists every product.
       { source: "/product-category/:path*", destination: "/shop/", permanent: true },
       // Old WordPress admin: content is now edited in the Headless Commerce CMS.
