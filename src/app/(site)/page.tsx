@@ -131,7 +131,7 @@ export default async function HomePage() {
           ))}
           <Link
             href="/contact-us/"
-            className="group flex aspect-square flex-col justify-between bg-deep p-8 text-white"
+            className="group bg-water flex aspect-square flex-col justify-between p-8 text-white"
           >
             <p className="eyebrow text-aqua">Not sure which fits?</p>
             <div>
