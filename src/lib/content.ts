@@ -195,7 +195,21 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getProduct(slug: string): Promise<Product | null> {
   const products = await getProducts();
-  return products.find((p) => p.slug === slug) ?? null;
+  return products.find((p) => p.slug === slug) ?? getUnlistedProduct(slug);
+}
+
+/**
+ * A product hidden from the catalog listing (like the CMS's $1 checkout test)
+ * that the CMS still serves by slug: reachable by direct link, never in the shop.
+ */
+async function getUnlistedProduct(slug: string): Promise<Product | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("cms", "products");
+  if (!/^[a-z0-9-]{1,200}$/.test(slug)) return null;
+  const raw = await cms<RawProduct>(`products/${slug}`).catch(() => null);
+  if (!raw?.slug) return null;
+  return mapProduct({ ...raw, seo: { ...raw.seo, noindex: true } });
 }
 
 /** Pages with their own routes rather than the generic page template. */

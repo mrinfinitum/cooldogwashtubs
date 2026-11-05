@@ -1,5 +1,5 @@
 import "server-only";
-import { getProducts, type Product } from "./content";
+import { getProduct, getProducts, type Product } from "./content";
 import { shippingFor } from "./format";
 
 export type RequestedItem = { slug?: unknown; color?: unknown; quantity?: unknown };
@@ -40,7 +40,7 @@ export async function priceCart(requested: RequestedItem[]) {
     const slug = typeof item.slug === "string" ? item.slug : "";
     const color = typeof item.color === "string" ? item.color : undefined;
     const quantity = Math.min(99, Math.max(1, Math.floor(Number(item.quantity) || 1)));
-    const product = products.find((p) => p.slug === slug);
+    const product = products.find((p) => p.slug === slug) ?? (slug ? await getProduct(slug) : null);
     if (!product) throw new CartError("A product in your cart is no longer available.");
     if (!product.inStock) throw new CartError(`${product.name} is out of stock.`);
     const option = color ? product.options.find((o) => o.color === color) : undefined;
