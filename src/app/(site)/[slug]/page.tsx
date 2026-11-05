@@ -9,7 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 
 export async function generateStaticParams() {
   const pages = await getPages();
-  return pages.filter((p) => !RESERVED_PAGE_SLUGS.has(p.slug)).map((p) => ({ slug: p.slug }));
+  const params = pages.filter((p) => !RESERVED_PAGE_SLUGS.has(p.slug)).map((p) => ({ slug: p.slug }));
+  // Cache Components needs at least one param. Until the storefront has CMS pages, this one 404s.
+  return params.length ? params : [{ slug: "privacy-policy" }];
 }
 
 export async function generateMetadata({ params }: PageProps<"/[slug]">): Promise<Metadata> {
