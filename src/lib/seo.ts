@@ -87,7 +87,7 @@ export function buildMetadata({
 
 const ENTITIES: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
 
-/** HTML to plain text (tags dropped, common entities decoded). */
+/** HTML to plain text (tags dropped, common entities decoded, no space before punctuation). */
 export function plainText(html: string): string {
   return html
     .replace(/<[^>]+>/g, " ")
@@ -97,6 +97,8 @@ export function plainText(html: string): string {
         : (ENTITIES[e.toLowerCase()] ?? m),
     )
     .replace(/\s+/g, " ")
+    // No space before punctuation ("basins , every" left by dropped tags), as the CMS tidies it.
+    .replace(/\s+([,.;:!?])/g, "$1")
     .trim();
 }
 
