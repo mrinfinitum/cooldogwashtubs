@@ -90,13 +90,11 @@ export default async function HomePage() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-deep/35 to-teal/10" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/55 via-ink/15 to-transparent" />
         <div className="mx-auto w-full max-w-[1600px] px-4 pb-16 lg:px-8 lg:pb-24">
-          <h1>
-            <span className="eyebrow block text-white">Dog Wash Tubs · Made in the USA</span>
-            <span className="headline mt-5 block max-w-5xl text-[19vw] sm:text-[8.5rem] lg:text-[11rem]">
-              Clean paws
-              <br />
-              happy tails
-            </span>
+          <p className="eyebrow block text-white">Dog Wash Tubs · Made in the USA</p>
+          <h1 className="headline mt-5 block max-w-5xl text-[19vw] sm:text-[8.5rem] lg:text-[11rem]">
+            Clean paws{" "}
+            <br />
+            happy tails
           </h1>
           <p className="mt-6 max-w-xl text-lg text-white/85">
             Durable, easy-to-use, and perfect for dogs of all sizes — keep your furry friend fresh

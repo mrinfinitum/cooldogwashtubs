@@ -1,4 +1,5 @@
 import { getPages, getProducts } from "@/lib/content";
+import { getPosts } from "@/lib/blog";
 import { formatPrice } from "@/lib/format";
 import { pageMetadata, productMetadata } from "@/lib/seo";
 import { CONTACT, SITE_NAME, canonicalUrl } from "@/lib/site";
@@ -11,6 +12,8 @@ export async function GET() {
   const [products, pages] = await Promise.all([getProducts(), getPages()]);
 
   const text = (value: unknown) => String(value ?? "");
+  const brief = (s: string, max = 180) =>
+    s.length <= max ? s : `${s.slice(0, max).replace(/\s+\S*$/, "")}…`;
   const link = (label: string, path: string, note?: string) =>
     `- [${label}](${canonicalUrl(path)})${note ? `: ${note}` : ""}`;
 
@@ -52,9 +55,18 @@ export async function GET() {
     "",
     ...productLines,
     "",
-    "## Planning, installation and specifications",
+    ...(guides.length
+      ? [
+          "## Planning, installation and specifications",
+          "",
+          ...guides.map(pageLine).filter((l): l is string => Boolean(l)),
+          "",
+        ]
+      : []),
+    "## Dog care blog",
     "",
-    ...guides.map(pageLine).filter((l): l is string => Boolean(l)),
+    link("All posts", "/blog/"),
+    ...getPosts().map((p) => link(p.title, `/blog/${p.slug}/`, brief(p.excerpt))),
     "",
     "## Company",
     "",

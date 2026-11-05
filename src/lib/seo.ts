@@ -10,6 +10,18 @@ const DESC_MAX = 160;
 const TAGLINE = "Premium dog wash tubs and dog bath tubs, made in the USA.";
 
 /** Shorten "A | B | C" titles by dropping trailing segments until they fit. */
+/**
+ * SEO titles in the shared CMS often end in the parent company's name (Yoast's
+ * "- The Dog Park Company", sometimes stored cut short). On this site the
+ * brand suffix is ours.
+ */
+export function brandTitle(title: string): string {
+  return title.replace(/\s+[-–|]\s+The Dog Park(?: Company|…|\.\.\.)?\s*$/i, ` | ${SITE_NAME}`);
+}
+
+/** Shared image for pages that have none of their own. */
+const DEFAULT_SHARE_IMAGE = "/media/dog-wash-tubs-header1.jpg";
+
 export function fitTitle(title: string): string {
   let parts = title
     .replace(/\s+/g, " ")
@@ -50,9 +62,9 @@ export function buildMetadata({
   type?: "website" | "article";
   noindex?: boolean;
 }): Metadata {
-  const t = fitTitle(title);
+  const t = fitTitle(brandTitle(title));
   const d = fitDescription(description);
-  const images = image ? [{ url: absolute(image) }] : undefined;
+  const images = [{ url: absolute(image ?? DEFAULT_SHARE_IMAGE) }];
   const url = canonicalUrl(path);
   return {
     title: { absolute: t },
@@ -68,7 +80,7 @@ export function buildMetadata({
       type,
       images,
     },
-    twitter: { card: images ? "summary_large_image" : "summary", title: t, description: d, images },
+    twitter: { card: "summary_large_image", title: t, description: d, images },
     ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
