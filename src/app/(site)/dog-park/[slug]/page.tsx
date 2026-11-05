@@ -117,7 +117,14 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
                     <dd className="font-medium">{series}</dd>
                   </div>
                 )}
-                {product.options.length > 0 && (
+                {product.options.length > 0 && !product.optionIsColor && (
+                  // Non-color options (e.g. plumbing side) are listed by name under the CMS option label.
+                  <div className="flex justify-between gap-4 py-2.5">
+                    <dt className="text-muted">{product.optionLabel}</dt>
+                    <dd className="text-right font-medium">{product.options.map((o) => o.color).join(", ")}</dd>
+                  </div>
+                )}
+                {product.options.length > 0 && product.optionIsColor && (
                   <div className="flex items-center justify-between gap-4 py-2.5">
                     <dt className="text-muted">Colors</dt>
                     <dd className="flex items-center gap-1.5">
