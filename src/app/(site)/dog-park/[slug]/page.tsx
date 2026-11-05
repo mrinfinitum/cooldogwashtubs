@@ -10,7 +10,7 @@ import ProductView from "@/components/ProductView";
 import QuoteCta from "@/components/QuoteCta";
 import RichText from "@/components/RichText";
 import { SITE_NAME, canonicalUrl } from "@/lib/site";
-import { productMetadata } from "@/lib/seo";
+import { productMetadata, withoutRepeats } from "@/lib/seo";
 import { getProduct, getProducts } from "@/lib/content";
 
 export async function generateStaticParams() {
@@ -99,7 +99,7 @@ async function ProductDetails({ params }: Pick<PageProps<"/dog-park/[slug]">, "p
         <div className="min-w-0 lg:col-span-7">
           <p className="eyebrow text-teal">Details &amp; features</p>
           <h2 className="headline mt-3 text-4xl lg:text-5xl">{shortName(product.name)}</h2>
-          <RichText html={product.descriptionHtml} className="mt-8 max-w-[68ch] text-[16px] leading-relaxed" />
+          <RichText html={withoutRepeats(product.descriptionHtml, product.page)} className="mt-8 max-w-[68ch] text-[16px] leading-relaxed" />
         </div>
 
         <aside className="lg:col-span-5">

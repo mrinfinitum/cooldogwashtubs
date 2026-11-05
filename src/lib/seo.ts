@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { formatPrice } from "./format";
 import { SITE_NAME, SITE_URL, canonicalUrl } from "./site";
-import type { Page, Product } from "./content";
+import type { Page, Product, ProductPage } from "./content";
 import { shortName } from "./format";
 
 const TITLE_MAX = 60;
@@ -133,6 +133,54 @@ export function productFacts(html: string): { warranty?: string; soldSeparately?
     ...(years ? { warranty: `${years} ${years === "1" ? "year" : "years"}` } : {}),
     ...(separately ? { soldSeparately: separately } : {}),
   };
+}
+
+/** Plain text for comparing: lower case, single spaces, no trailing punctuation. */
+const sameText = (html: string) =>
+  plainText(html).toLowerCase().replace(/[.!:;,\s]+$/, "");
+
+const HEADING = /^<h[1-6]\b|^<p[^>]*>\s*<(?:b|strong)\b[^>]*>[\s\S]*?<\/(?:b|strong)>\s*(?:<(?:b|strong)\b[^>]*>\s*<\/(?:b|strong)>\s*)*<\/p>$/i;
+
+/**
+ * The description for "Details & features" without what the product page
+ * already shows from its Product page fields: the summary paragraph, bullets
+ * that are key highlights (and a heading left introducing nothing), a short
+ * "N year warranty" line and the "… sold separately" line. The CMS text is
+ * unchanged; everything else keeps its order.
+ */
+export function withoutRepeats(html: string, page: ProductPage): string {
+  const summary = page.summary ? sameText(page.summary) : "";
+  const shown = new Set(page.highlights.map(sameText));
+  // Top-level blocks; text between them is kept as is.
+  const blocks = html.match(/<(p|ul|ol|h[1-6])\b[^>]*>[\s\S]*?<\/\1>|[\s\S]+?(?=<(?:p|ul|ol|h[1-6])\b|$)/gi) ?? [];
+  type Block = { html: string; drop?: boolean; emptied?: boolean; heading?: boolean };
+  const out: Block[] = blocks.map((b) => {
+    const tag = b.match(/^<(\w+)/)?.[1]?.toLowerCase();
+    if (tag === "p") {
+      const text = sameText(b);
+      if (summary && text === summary) return { html: b, drop: true };
+      if (page.warranty && text.length < 40 && /^(?:\d+|one|two|three|four|five|ten)[\s-]*(?:years?|yrs?)(?:\s+limited)?\s+warranty$/.test(text))
+        return { html: b, drop: true };
+      if (page.soldSeparately && /sold separately$/.test(text)) return { html: b, drop: true };
+    }
+    if ((tag === "ul" || tag === "ol") && shown.size) {
+      const kept = b.replace(/<li\b[^>]*>([\s\S]*?)<\/li>\s*/gi, (li, inner: string) => (shown.has(sameText(inner)) ? "" : li));
+      if (!/<li\b/i.test(kept)) return { html: b, drop: true, emptied: true };
+      return { html: kept };
+    }
+    return { html: b, heading: HEADING.test(b.trim()) };
+  });
+  // A heading whose only content was an emptied list goes too.
+  const real = (b: Block) => !b.drop && b.html.trim() !== "";
+  out.forEach((b, i) => {
+    if (!b.heading || b.drop) return;
+    const after = out.slice(i + 1);
+    const next = after.findIndex(real);
+    const between = next === -1 ? after : after.slice(0, next);
+    if (!between.some((x) => x.emptied)) return;
+    if (next === -1 || after[next].heading) b.drop = true;
+  });
+  return out.filter((b) => !b.drop).map((b) => b.html).join("");
 }
 
 export function productMetadata(product: Product): Metadata {
