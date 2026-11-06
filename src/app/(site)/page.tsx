@@ -127,7 +127,7 @@ export default async function HomePage() {
         </div>
         <div className="grid grid-cols-1 gap-x-4 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
+            <ProductCard key={p.id} product={p} flip={false} />
           ))}
           <Link
             href="/contact-us/"
